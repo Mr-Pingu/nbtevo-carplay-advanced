@@ -103,8 +103,9 @@ python3 -m unittest discover -s tests        # about 3 minutes; installer tests 
 
 - NBT Evo: two QNX 6.5 nodes. sshd runs on **hu-jacinto**; the HMI (`HmiMain3D`), Connectivity, mm-ipod and the plugin live on
   **hu-omap** (`on -f hu-omap <cmd>`, or `/net/hu-omap/...`). Root SSH over ENET at `169.254.199.99`; OpenSSH 5.2 offers only an
-  `ssh-rsa` host key. `SSH_PASSWORD` in the installer is the root password (committed on purpose, by the owner's decision); ssh gets it
-  through an askpass helper (`SSH_ASKPASS_REQUIRE=force`, OpenSSH 8.4+).
+  `ssh-rsa` host key. The installer uses normal SSH authentication by default (keys or a password prompt).
+  Optional `SSH_PASSWORD` from the environment supplies the existing root password through an askpass helper
+  (`SSH_ASKPASS_REQUIRE=force`, OpenSSH 8.4+); no password is embedded in the installer.
 - Missing tools: no `head`, `awk`, `tar`, `printf` on hu-omap (possibly no `od`, `cmp`); no `ln`, `sed`, `date` on hu-jacinto; QNX
   `grep` has no `\|` and no `-A`; `scp` may be missing; some images have no `/tmp` (ksh here-documents then need `TMPDIR`).
 - `/var` (-> `/fs/sda1`), `/opt`, `/bin` (-> `/fs/sda0/...`), `/opt/hmi/data` and the HMI's `rw` (-> `ID5`) are **path-manager links
