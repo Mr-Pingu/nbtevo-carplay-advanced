@@ -67,7 +67,7 @@ BMW navigation would. How it gets there depends on the car's cluster; the instal
 |---|---|---|
 | Who draws | **We do.** The plugin draws every picture itself, polygon by polygon, on the cluster's `HUDTerminal` over MOST. | **The car does.** The plugin sends the route data to the KOMBI's own guidance service (SOME/IP), and the cluster and the HUD draw it with their own graphics. |
 | Pictures | Mapbox's maneuver and lane drawings, turned into HUD polygons (previews below). | The car's own arrows, distance and lane row. |
-| Status | **Tested in a car.** MINI F54 (HMI 1703): pictures, distance, street, HUD effects, lanes. BMW F30/F31 digital cluster (NBT Evo ID5, PR #13): arrow and distance with the `hud_box` / `hud_hide` switches set by hand (its picture buffer is 126�77 and it shows its own distance bar); the plugin now fits the box and hides the bar itself (not yet tried there). | **Not tested in a car.** A port of NBT-AAD's car-verified KOMBI stack (see Credits), checked against a fake KOMBI only. |
+| Status | **Tested in a car.** MINI F54 (HMI 1703): pictures, distance, street, HUD effects, lanes. BMW F30/F31 digital cluster (NBT Evo ID5, PR #13): arrow and distance with the `hud_box` / `hud_hide` switches set by hand (its picture buffer is 126×77 and it shows its own distance bar); the plugin now fits the box and hides the bar itself (not yet tried there). | **Not tested in a car.** A port of NBT-AAD's car-verified KOMBI stack (see Credits), checked against a fake KOMBI only. |
 
 **On the MOST cluster** the plugin takes the cluster's own handles from the BMW navigation's set-up at start (they differ between
 clusters: an F25 X3 has its texts elsewhere than a MINI), asks the cluster how big its picture area is and fits the arrow into it,

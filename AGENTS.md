@@ -683,7 +683,7 @@ display layer does; it is now shortened to 22, `shortRoad` below).
   7. Runs itself there with `--payload --kind --mode --hmi [--cluster]`, removes the upload, and copies the run's backup and the kept
      system originals to `BACKUP/` (with the head unit's full output as `installer-output.log`).
   8. Ends with a summary (what is installed or removed, where the backup is) and offers the restart.
-- Output: a heading per step, V / ! marks, the head unit's lines indented (colours only on a terminal, `NO_COLOR` turns them off).
+- Output: a heading per step, ✓ / ! marks, the head unit's lines indented (colours only on a terminal, `NO_COLOR` turns them off).
 - A restart never answers (the unit goes down with the connection open): `remote_reboot` runs it in the background, shows its lines,
   and stops waiting once the unit says it reboots ("rebooting the head unit" from libcpreboot.so, or OnOffDSICommander appreset).
   It waits `REBOOT_CONFIRM_S` (75) s; no word by then is a note and exit 3 (what ran before it is complete), not an ERROR.
@@ -702,8 +702,10 @@ display layer does; it is now shortened to 22, `shortRoad` below).
     write the switch files (and link or unlink the mm-ipod wrapper for "CarPlay directions in HUD"), read by mm-ipod at the next
     CarPlay connection. `boot.sh` skips the bootloop guard when `hud_only` is there (an uncoded car never starts the menu, which would
     otherwise count every boot as failed and end in safe mode, taking the HUD down with it). `check_menu.py --hud` checks that XML.
-    The entry point (state 20 after focus 8195 in Media/Radio) rendered on iDrive 6 in IDEmu (g30-bmw, A4A coded) with the full menu;
-    the HUD-only menu itself is not tried on iDrive 6 yet.
+    Before the menu move, the previous Media/Radio entry point (state 20 after focus 8195) rendered on iDrive 6 in IDEmu
+    (g30-bmw, A4A coded) with the full menu. This is historical verification of the old location; the new
+    My Vehicle > iDrive Settings entry point (state 600 after focus 730) still needs a head-unit check.
+    The HUD-only menu itself is not tried on iDrive 6 yet.
 - **On the head unit**: it refuses off hu-omap, without root (`pidin` effective UID), with an unsupported build, with two hook lines,
   or with a linked `start_screen.sh`. The plan is printed first; `--dry-run` stops there. Then a transaction:
   1. Backups to `/var/opt/carplay-advanced-backups/<time>-<action>`, with the system originals kept once in `originals/`; every copy
