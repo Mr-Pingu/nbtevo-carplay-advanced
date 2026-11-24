@@ -158,8 +158,11 @@ boot.sh (from /bin/start_screen.sh): path-manager links for the layout, carplay.
   (`_ZTVN3bmw9PluginAppE`, 2 header words + 41 slots) with slot 22 (`onInit`) replaced. `appOnInit` registers the action handlers
   (`addHandler(actionId, {object, stub})`), calls the base `onInit`, and sets every model (`updateModel(modelId, bool)`).
 - **Manifest and menu**: `CarPlayMenu.manifest` (`<file>{pluginDir}/CarPlayMenu</file>`, DescFile, TextDBFile). `CarPlayMenu.xml` uses
-  `applicationType="Custom"` with `insertStateID="20"` (the Media/Radio list `ST_Ent_Selection`) and `insertAfterFocusID="8195"`
-  (right after "Now playing in Apple CarPlay"; without that row it sits after AM). Options are checkboxes (`raAction` +
+  `applicationType="Custom"` with `insertStateID="600"` (My Vehicle > iDrive Settings,
+  `CCarSelectionSettingsActivityGenerated`) and `insertAfterFocusID="730"` (a factory row in that state's List).
+  Verified against the reference HMI: its generated activity registers state 600 with layout 42073; the
+  `hmimycarselectionsettings.pba` List contains focus 730. Internal plugin state 20 stays unchanged.
+  The new location still needs a head-unit check after restart. Options are checkboxes (`raAction` +
   `raBoolModel`), submenus are buttons with an `hmiAction` to their own `hmiState`, and the sensitivity levels are radio buttons (the
   plugin sets all three models), as are the HUD effect colours. Texts come from `src/texts.py`, English in every HMI language (100000 = the language name).
 
@@ -680,7 +683,7 @@ display layer does; it is now shortened to 22, `shortRoad` below).
   7. Runs itself there with `--payload --kind --mode --hmi [--cluster]`, removes the upload, and copies the run's backup and the kept
      system originals to `BACKUP/` (with the head unit's full output as `installer-output.log`).
   8. Ends with a summary (what is installed or removed, where the backup is) and offers the restart.
-- Output: a heading per step, ✓ / ! marks, the head unit's lines indented (colours only on a terminal, `NO_COLOR` turns them off).
+- Output: a heading per step, V / ! marks, the head unit's lines indented (colours only on a terminal, `NO_COLOR` turns them off).
 - A restart never answers (the unit goes down with the connection open): `remote_reboot` runs it in the background, shows its lines,
   and stops waiting once the unit says it reboots ("rebooting the head unit" from libcpreboot.so, or OnOffDSICommander appreset).
   It waits `REBOOT_CONFIRM_S` (75) s; no word by then is a note and exit 3 (what ran before it is complete), not an ERROR.

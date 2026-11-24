@@ -1,7 +1,7 @@
 # nbtevo-carplay-advanced
 
 Apple CarPlay add-ons for the BMW / MINI **NBT Evo** head unit (iDrive 5 and iDrive 6): a **CarPlay Advanced Settings** menu in
-Media/Radio, and the iPhone's **turn-by-turn directions in the cluster and the head-up display**.
+My Vehicle > iDrive Settings, and the iPhone's **turn-by-turn directions in the cluster and the head-up display**.
 
 It is an HMI plugin plus a few small libraries that hook into the head unit's own processes at run time. Apart from one line added
 to the boot script, no system file is replaced or patched on disk, and one installer script puts it on (and takes it off) over the car's ENET connection, with backups of everything
@@ -34,7 +34,7 @@ iDrive 6 has natively, and a bit more:
 The menu:
 
 ```
-Media/Radio > CarPlay Advanced Settings
+My Vehicle > iDrive Settings > CarPlay Advanced Settings
   Full-screen CarPlay
   CarPlay directions in HUD
   HUD effects >        Fill toward the turn / Blink near the turn / Effect colour > (Orange, Grey, White) / HUD debug log
@@ -46,10 +46,10 @@ Media/Radio > CarPlay Advanced Settings
 ```
 
 On iDrive 6 the HMI already does full screen, knob tilts and the touchpad (when the car is coded for it), so there the installer
-puts on the turn-by-turn part by default (`--hud`), with a **HUD-only menu** in the same place in Media/Radio:
+puts on the turn-by-turn part by default (`--hud`), with a **HUD-only menu** in the same place under My Vehicle > iDrive Settings:
 
 ```
-Media/Radio > CarPlay Advanced Settings
+My Vehicle > iDrive Settings > CarPlay Advanced Settings
   CarPlay directions in HUD
   HUD effects >        Fill toward the turn / Blink near the turn / Effect colour > (Orange, Grey, White) / HUD debug log
 ```
@@ -67,7 +67,7 @@ BMW navigation would. How it gets there depends on the car's cluster; the instal
 |---|---|---|
 | Who draws | **We do.** The plugin draws every picture itself, polygon by polygon, on the cluster's `HUDTerminal` over MOST. | **The car does.** The plugin sends the route data to the KOMBI's own guidance service (SOME/IP), and the cluster and the HUD draw it with their own graphics. |
 | Pictures | Mapbox's maneuver and lane drawings, turned into HUD polygons (previews below). | The car's own arrows, distance and lane row. |
-| Status | **Tested in a car.** MINI F54 (HMI 1703): pictures, distance, street, HUD effects, lanes. BMW F30/F31 digital cluster (NBT Evo ID5, PR #13): arrow and distance with the `hud_box` / `hud_hide` switches set by hand (its picture buffer is 126×77 and it shows its own distance bar); the plugin now fits the box and hides the bar itself (not yet tried there). | **Not tested in a car.** A port of NBT-AAD's car-verified KOMBI stack (see Credits), checked against a fake KOMBI only. |
+| Status | **Tested in a car.** MINI F54 (HMI 1703): pictures, distance, street, HUD effects, lanes. BMW F30/F31 digital cluster (NBT Evo ID5, PR #13): arrow and distance with the `hud_box` / `hud_hide` switches set by hand (its picture buffer is 126�77 and it shows its own distance bar); the plugin now fits the box and hides the bar itself (not yet tried there). | **Not tested in a car.** A port of NBT-AAD's car-verified KOMBI stack (see Credits), checked against a fake KOMBI only. |
 
 **On the MOST cluster** the plugin takes the cluster's own handles from the BMW navigation's set-up at start (they differ between
 clusters: an F25 X3 has its texts elsewhere than a MINI), asks the cluster how big its picture area is and fits the arrow into it,
@@ -143,7 +143,7 @@ It then:
    plugin and backs those files up on the head unit too (copied to `BACKUP/` as well afterwards);
 4. installs, prints a summary of what is on the head unit now, and offers to **restart** it.
 
-After the restart: **Media/Radio > CarPlay Advanced Settings**. On a first install all options are off; a reinstall keeps them.
+After the restart: **My Vehicle > iDrive Settings > CarPlay Advanced Settings**. On a first install all options are off; a reinstall keeps them.
 
 Other commands:
 

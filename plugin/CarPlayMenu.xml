@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- CarPlay Advanced Settings (src/cpm.cpp). Media/Radio row placed right after "Now playing in Apple CarPlay"
-     (focus ID 8195 of ST_Ent_Selection, state 20) with the HMI's "entry button everywhere": applicationType Custom + insertStateID
-     + insertAfterFocusID. Options are checkboxes (raAction + raBoolModel), submenus are buttons with an hmiAction, the sensitivity
+<!-- CarPlay Advanced Settings (src/cpm.cpp). Entry under My Vehicle > iDrive Settings
+     (CCarSelectionSettingsActivityGenerated, state 600), after factory focus 730. Uses the HMI's "entry button everywhere":
+     applicationType Custom + insertStateID + insertAfterFocusID. Options are checkboxes (raAction + raBoolModel), submenus are buttons with an hmiAction, the sensitivity
      levels radio buttons (raBoolModel, set by the plugin). Texts in CarPlayMenu_ALL_Texts.zip (src/texts.py).
        20 CarPlay Advanced Settings: Full-screen CarPlay, CarPlay directions in HUD, HUD effects >, iDrive control >,
           Restart to apply
@@ -11,7 +11,7 @@
        44     Touchpad: Enable touchpad, Tap touchpad as click, Touchpad sensitivity >, Two fingers tap to back
        50       Touchpad sensitivity: Low, Medium, High -->
 <pluginApps>
-  <pluginApp applicationType="Custom" insertStateID="20" insertAfterFocusID="8195" text="CarPlay Advanced Settings" textModel="10">
+  <pluginApp applicationType="Custom" insertStateID="600" insertAfterFocusID="730" text="CarPlay Advanced Settings" textModel="10">
     <entryButton action="2" id="1" model="10" text="CarPlay Advanced Settings"/>
     <actions>
       <combinedAction id="2">

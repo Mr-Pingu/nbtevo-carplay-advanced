@@ -4,7 +4,7 @@
        81   HUD effects: Fill toward the turn, Blink near the turn, Effect colour >
        93     Effect colour: Orange, Grey, White -->
 <pluginApps>
-  <pluginApp applicationType="Custom" insertStateID="20" insertAfterFocusID="8195" text="CarPlay Advanced Settings" textModel="10">
+  <pluginApp applicationType="Custom" insertStateID="600" insertAfterFocusID="730" text="CarPlay Advanced Settings" textModel="10">
   <entryButton action="2" id="1" model="10" text="CarPlay Advanced Settings" />
   <actions>
     <combinedAction id="2">
