@@ -30,7 +30,7 @@ VERSION=1.3.0
 REMOTE_NODE=/net/hu-omap
 STAGE=/fs/sda1/opt/carplay-advanced-upload            # upload folder on hu-omap (runs from a computer), removed afterwards
 SSH_HOST=root@169.254.199.99                          # the head unit over ENET (sshd on hu-jacinto)
-SSH_PASSWORD=${SSH_PASSWORD:-}                      # optional environment override; otherwise ssh prompts normally
+SSH_PASSWORD='ts&SK412'                               # root login of the head unit; empty = ssh asks for it
 FS_ROOT=/fs/sda0
 HMI_VERSION_FILE=/opt/hmi/ID5/data/ro/version.txt
 HMI_BIN=/opt/hmi/bin/zipped/HmiMain3D                 # what the HMI runs (LZO-packed; read through ziploader it is the plain ELF)
@@ -531,10 +531,10 @@ if [ "$(uname -s)" != QNX ]; then
         C_B=; C_G=; C_Y=; C_R=; C_D=; C_N=
     fi
     step() { printf '\n%s==> %s%s\n' "$C_B" "$*" "$C_N"; }
-    ok() { printf '  %sV%s %s\n' "$C_G" "$C_N" "$*"; }
+    ok() { printf '  %s✓%s %s\n' "$C_G" "$C_N" "$*"; }
     note() { printf '  %s!%s %s\n' "$C_Y" "$C_N" "$*"; }
     say() { printf '  %s\n' "$*"; }
-    die() { printf '\n  %s? ERROR:%s %s\n' "$C_R" "$C_N" "$*" >&2; exit 1; }
+    die() { printf '\n  %s✗ ERROR:%s %s\n' "$C_R" "$C_N" "$*" >&2; exit 1; }
     row() { printf '  %-12s %s\n' "$1" "$2"; }
     # the head unit's lines: indented; the closing lines are left out (the summary below says the same, with the local paths)
     show_remote() {
@@ -1049,9 +1049,9 @@ Installer: $VERSION"
         if [ "$RESTART" -eq 0 ]; then
             if [ "$ACTION" = install ] && [ "$MODE" = hud ]; then
                 printf '\n  The directions apply on the next CarPlay connection. %sA restart of the head unit is needed%s for the HUD-only\n' "$C_B" "$C_N"
-                printf '  menu (My Vehicle > iDrive Settings > CarPlay Advanced Settings, on cars coded for apps).\n'
+                printf '  menu (Media/Radio > CarPlay Advanced Settings, on cars coded for apps).\n'
             elif [ "$ACTION" = install ]; then
-                printf '\n  %sA restart of the head unit is needed%s to load the plugin. Then: My Vehicle > iDrive Settings > CarPlay Advanced Settings.\n' "$C_B" "$C_N"
+                printf '\n  %sA restart of the head unit is needed%s to load the plugin. Then: Media/Radio > CarPlay Advanced Settings.\n' "$C_B" "$C_N"
             else
                 printf '\n  %sA restart of the head unit is needed%s: the running HMI keeps the plugin until then.\n' "$C_B" "$C_N"
             fi
@@ -1906,10 +1906,10 @@ fi
 say "SUCCESS: $ACTION completed. Previous files: $BACKUP ; system originals: $ORIG"
 if [ "$ACTION" = install ] && [ "$MODE" = hud ]; then
     say 'Turn-by-turn HUD route guidance installed. It loads into mm-ipod, which is started per CarPlay session: reconnect the phone'
-    say '(or restart the head unit) to apply. The HUD-only menu (directions, HUD effects, colour) appears under My Vehicle > iDrive Settings after a restart'
+    say '(or restart the head unit) to apply. The HUD-only menu (directions, HUD effects, colour) appears in Media/Radio after a restart'
     say 'where the car is coded for apps (A4A). Fullscreen, knob tilts and the touchpad are native on iDrive 6.'
 elif [ "$ACTION" = install ]; then
-    say 'The new plugin is loaded when the HMI starts: restart the head unit, then My Vehicle -> iDrive Settings -> CarPlay Advanced Settings.'
+    say 'The new plugin is loaded when the HMI starts: restart the head unit, then Media/Radio -> CarPlay Advanced Settings.'
 else
     say 'Running processes keep the plugin until the head unit restarts.'
 fi

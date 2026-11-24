@@ -145,9 +145,6 @@ It then:
 
 After the restart: **My Vehicle > iDrive Settings > CarPlay Advanced Settings**. On a first install all options are off; a reinstall keeps them.
 
-SSH uses your existing keys or asks for the head unit's current password. For unattended use, supply that same password
-through the `SSH_PASSWORD` environment variable. The installer does not change the head unit's password.
-
 Other commands:
 
 ```bash
