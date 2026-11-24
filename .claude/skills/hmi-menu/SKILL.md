@@ -23,9 +23,10 @@ python3 .claude/skills/hmi-menu/check_menu.py     # prints the tree, the ids in 
 
 ## How the XML works
 
-- `pluginApp applicationType="Custom" insertStateID="600" insertAfterFocusID="730"`: the entry row goes under
-  My Vehicle > iDrive Settings (`CCarSelectionSettingsActivityGenerated`, state 600), after factory focus 730.
-  The reference HMI registers this state with layout 42073; `hmimycarselectionsettings.pba` contains that focus. `entryButton` (id 1, model 10) has the
+- `pluginApp applicationType="Custom" insertStateID="60" insertAfterFocusID="529"`: the entry row goes directly under
+  My Vehicle (`ST_MyV_Selection`, state 60), after the iDrive Settings row (focus 529, which opens state 600).
+  The reference 2403 HMI constructs this row in `CCarSelectionActivity`; its parent uses layout 42067.
+  `entryButton` (id 1, model 10) has the
   `combinedAction` 2 = `raAction` 3 (no handler needed) + `hmiAction` 4 -> the plugin's first page, hmiState 20.
 - **Every id is unique across the whole app**: actions, models, hmiStates and components (and the entry button) share one
   number space. `check_menu.py` prints the ids in use and the first free one. Never reuse or renumber an existing id: the ids of
@@ -111,6 +112,6 @@ the parent's button for a page); ids stay. **Remove an option**: remove the comp
 
 ## Checking in the car
 
-Install (`sh carplay-advanced.sh install`), restart, open My Vehicle -> iDrive Settings -> CarPlay Advanced Settings, and walk every page. The plugin
+Install (`sh carplay-advanced.sh install`), restart, open My Vehicle -> CarPlay Advanced Settings, and walk every page. The plugin
 log `/dev/shmem/carplaymenu.log` shows `CarPlayMenu: onInit, handlers registered` at start and `CarPlayMenu: <label> -> ON` for
 every tick; a row that logs nothing has an action without a handler (`check_menu.py` would have said so).

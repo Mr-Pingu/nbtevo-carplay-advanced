@@ -1,7 +1,7 @@
 # nbtevo-carplay-advanced
 
 Apple CarPlay add-ons for the BMW / MINI **NBT Evo** head unit (iDrive 5 and iDrive 6): a **CarPlay Advanced Settings** menu in
-My Vehicle > iDrive Settings, and the iPhone's **turn-by-turn directions in the cluster and the head-up display**.
+My Vehicle, and the iPhone's **turn-by-turn directions in the cluster and the head-up display**.
 
 It is an HMI plugin plus a few small libraries that hook into the head unit's own processes at run time. Apart from one line added
 to the boot script, no system file is replaced or patched on disk, and one installer script puts it on (and takes it off) over the car's ENET connection, with backups of everything
@@ -34,7 +34,7 @@ iDrive 6 has natively, and a bit more:
 The menu:
 
 ```
-My Vehicle > iDrive Settings > CarPlay Advanced Settings
+My Vehicle > CarPlay Advanced Settings
   Full-screen CarPlay
   CarPlay directions in HUD
   HUD effects >        Fill toward the turn / Blink near the turn / Effect colour > (Orange, Grey, White) / HUD debug log
@@ -46,10 +46,10 @@ My Vehicle > iDrive Settings > CarPlay Advanced Settings
 ```
 
 On iDrive 6 the HMI already does full screen, knob tilts and the touchpad (when the car is coded for it), so there the installer
-puts on the turn-by-turn part by default (`--hud`), with a **HUD-only menu** in the same place under My Vehicle > iDrive Settings:
+puts on the turn-by-turn part by default (`--hud`), with a **HUD-only menu** in the same place under My Vehicle:
 
 ```
-My Vehicle > iDrive Settings > CarPlay Advanced Settings
+My Vehicle > CarPlay Advanced Settings
   CarPlay directions in HUD
   HUD effects >        Fill toward the turn / Blink near the turn / Effect colour > (Orange, Grey, White) / HUD debug log
 ```
@@ -143,7 +143,7 @@ It then:
    plugin and backs those files up on the head unit too (copied to `BACKUP/` as well afterwards);
 4. installs, prints a summary of what is on the head unit now, and offers to **restart** it.
 
-After the restart: **My Vehicle > iDrive Settings > CarPlay Advanced Settings**. On a first install all options are off; a reinstall keeps them.
+After the restart: **My Vehicle > CarPlay Advanced Settings**. On a first install all options are off; a reinstall keeps them.
 
 Other commands:
 

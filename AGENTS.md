@@ -158,11 +158,12 @@ boot.sh (from /bin/start_screen.sh): path-manager links for the layout, carplay.
   (`_ZTVN3bmw9PluginAppE`, 2 header words + 41 slots) with slot 22 (`onInit`) replaced. `appOnInit` registers the action handlers
   (`addHandler(actionId, {object, stub})`), calls the base `onInit`, and sets every model (`updateModel(modelId, bool)`).
 - **Manifest and menu**: `CarPlayMenu.manifest` (`<file>{pluginDir}/CarPlayMenu</file>`, DescFile, TextDBFile). `CarPlayMenu.xml` uses
-  `applicationType="Custom"` with `insertStateID="600"` (My Vehicle > iDrive Settings,
-  `CCarSelectionSettingsActivityGenerated`) and `insertAfterFocusID="730"` (a factory row in that state's List).
-  Verified against the reference HMI: its generated activity registers state 600 with layout 42073; the
-  `hmimycarselectionsettings.pba` List contains focus 730. Internal plugin state 20 stays unchanged.
-  The new location still needs a head-unit check after restart. Options are checkboxes (`raAction` +
+  `applicationType="Custom"` with `insertStateID="60"` (My Vehicle, `ST_MyV_Selection`) and
+  `insertAfterFocusID="529"` (the factory iDrive Settings row, which opens state 600).
+  Static reference: 2403 `CCarSelectionActivity` constructs the settings row with focus 529 / target 600;
+  `CCarSelectionActivityGenerated` registers parent state 60 / layout 42067. Internal plugin state 20 stays unchanged.
+  The earlier state 600 / focus 730 attempt loaded the plugin but showed no entry on the user's 2403 unit.
+  The direct My Vehicle placement still needs a head-unit check after restart. Options are checkboxes (`raAction` +
   `raBoolModel`), submenus are buttons with an `hmiAction` to their own `hmiState`, and the sensitivity levels are radio buttons (the
   plugin sets all three models), as are the HUD effect colours. Texts come from `src/texts.py`, English in every HMI language (100000 = the language name).
 
@@ -704,7 +705,7 @@ display layer does; it is now shortened to 22, `shortRoad` below).
     otherwise count every boot as failed and end in safe mode, taking the HUD down with it). `check_menu.py --hud` checks that XML.
     Before the menu move, the previous Media/Radio entry point (state 20 after focus 8195) rendered on iDrive 6 in IDEmu
     (g30-bmw, A4A coded) with the full menu. This is historical verification of the old location; the new
-    My Vehicle > iDrive Settings entry point (state 600 after focus 730) still needs a head-unit check.
+    My Vehicle entry point (state 60 after focus 529) still needs a head-unit check.
     The HUD-only menu itself is not tried on iDrive 6 yet.
 - **On the head unit**: it refuses off hu-omap, without root (`pidin` effective UID), with an unsupported build, with two hook lines,
   or with a linked `start_screen.sh`. The plan is printed first; `--dry-run` stops there. Then a transaction:

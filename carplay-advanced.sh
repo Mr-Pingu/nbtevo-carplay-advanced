@@ -1049,9 +1049,9 @@ Installer: $VERSION"
         if [ "$RESTART" -eq 0 ]; then
             if [ "$ACTION" = install ] && [ "$MODE" = hud ]; then
                 printf '\n  The directions apply on the next CarPlay connection. %sA restart of the head unit is needed%s for the HUD-only\n' "$C_B" "$C_N"
-                printf '  menu (My Vehicle > iDrive Settings > CarPlay Advanced Settings, on cars coded for apps).\n'
+                printf '  menu (My Vehicle > CarPlay Advanced Settings, on cars coded for apps).\n'
             elif [ "$ACTION" = install ]; then
-                printf '\n  %sA restart of the head unit is needed%s to load the plugin. Then: My Vehicle > iDrive Settings > CarPlay Advanced Settings.\n' "$C_B" "$C_N"
+                printf '\n  %sA restart of the head unit is needed%s to load the plugin. Then: My Vehicle > CarPlay Advanced Settings.\n' "$C_B" "$C_N"
             else
                 printf '\n  %sA restart of the head unit is needed%s: the running HMI keeps the plugin until then.\n' "$C_B" "$C_N"
             fi
@@ -1906,10 +1906,10 @@ fi
 say "SUCCESS: $ACTION completed. Previous files: $BACKUP ; system originals: $ORIG"
 if [ "$ACTION" = install ] && [ "$MODE" = hud ]; then
     say 'Turn-by-turn HUD route guidance installed. It loads into mm-ipod, which is started per CarPlay session: reconnect the phone'
-    say '(or restart the head unit) to apply. The HUD-only menu (directions, HUD effects, colour) appears under My Vehicle > iDrive Settings after a restart'
+    say '(or restart the head unit) to apply. The HUD-only menu (directions, HUD effects, colour) appears under My Vehicle after a restart'
     say 'where the car is coded for apps (A4A). Fullscreen, knob tilts and the touchpad are native on iDrive 6.'
 elif [ "$ACTION" = install ]; then
-    say 'The new plugin is loaded when the HMI starts: restart the head unit, then My Vehicle -> iDrive Settings -> CarPlay Advanced Settings.'
+    say 'The new plugin is loaded when the HMI starts: restart the head unit, then My Vehicle -> CarPlay Advanced Settings.'
 else
     say 'Running processes keep the plugin until the head unit restarts.'
 fi
